@@ -1,12 +1,12 @@
 <ul>
   <li>
-    <h2>Number(数字)<h2>
+    <h2>Number(数字)</h2>
   </li>
   <li>
-    <h2>String(字符串)<h2>
+    <h2>String(字符串)</h2>
   </li>
   <li>
-    <h2>Boolean(布尔)<h2>
+    <h2>Boolean(布尔)</h2>
   </li>
   <li>
     <h2>Symbol(符号)<h2>
