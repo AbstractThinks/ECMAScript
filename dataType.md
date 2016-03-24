@@ -1,8 +1,9 @@
 <ul>
   <li>
     <h4>Number(数字)</h4>
-    <P style="border:2px solid #4d4e53;margin-top:5px;">JavaScript 不区分整数值和浮点数值，所有数字在 JavaScript 中均用浮点数值表示，所以在进行数字运算的时候要特别注意</P>
     <pre>
+      JavaScript 不区分整数值和浮点数值，所有数字在 JavaScript 中均用浮点数值表示，所以在进行数字运算的时候要特别注意
+      
       0.1 + 0.2 = 0.30000000000000004
       0.2 + 0.2 = 0.4
       0.2 + 0.4 = 0.6000000000000001
