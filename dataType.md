@@ -1,37 +1,37 @@
 <ul>
   <li>
-    <h2>Number(数字)</h2>
+    <h4>Number(数字)</h4>
   </li>
   <li>
-    <h2>String(字符串)</h2>
+    <h4>String(字符串)</h4>
   </li>
   <li>
-    <h2>Boolean(布尔)</h2>
+    <h4>Boolean(布尔)</h4>
   </li>
   <li>
-    <h2>Symbol(符号)<h2>
+    <h4>Symbol(符号)</h4>
   </li>
   <li>
-    <h2>Object(对象)<h2>
+    <h4>Object(对象)</h4>
     <ul>
       <li>
-        <h3>Function(函数)</h3>
+        <h5>Function(函数)</h5>
       </li>
       <li>
-        <h3>Array(数组)</h3>
+        <h5>Array(数组)</h5>
       </li>
       <li>
-        <h3>Date(日期)</h3>
+        <h5>Date(日期)</h5>
       </li>
       <li>
-        <h3>RegExp(正则表达式)</h3>
+        <h5>RegExp(正则表达式)</h5>
       </li>
     </ul>
   </li>
   <li>
-    <h2>Null(空)<h2>
+    <h4>Null(空)</h4>
   </li>
   <li>
-    <h2>Undefined(未定义)<h2>
+    <h4>Undefined(未定义)</h4>
   </li>
 </ul>
