@@ -14,6 +14,10 @@
   </li>
   <li>
     <h4>Boolean(布尔)</h4>
+    <pre>
+      1.false、0、空字符串("")、NaN、null 和 undefined 被转换为 false
+      2.所有其他值被转换为 true
+    </pre>
   </li>
   <li>
     <h4>Symbol(符号)</h4>
