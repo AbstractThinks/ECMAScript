@@ -12,7 +12,7 @@ var point = {
  point.moveTo(1, 1)      //this 绑定到当前对象，即 point 对象
 </pre>
 
-<h3></h3>
+<h3>作为函数调用</h3>
 <pre>
 function makeNoSense(x) { 
  this.x = x;                //this绑定到window上
