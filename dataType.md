@@ -58,14 +58,16 @@
 
         2、将构造函数的作用域赋给新对象（因此this指向了这个新对象）；[A.apply(a)]  [A原来的this指向的是window]
         
-        3、执行构造函数中的代码(为这个新对象添加属性)；a.name = name
+        3、执行构造函数中的代码(为这个新对象添加属性)；for(var i in A.prototype) {a[i] = A.prototype[i]}
         
         4、返回新对象。 return a
         
         a.__proto__               //A
         A.__proto__               //function(){}
+        A.prototype               //{}
         a.__proto__.__proto__     //Object {}
         A.__proto__.__proto__     //Object {}
+        A.prototype.__proto__     //Object {}
       </pre>
     <ul>
       <li>
