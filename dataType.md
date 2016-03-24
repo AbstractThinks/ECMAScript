@@ -11,6 +11,17 @@
   </li>
   <li>
     <h4>String(字符串)</h4>
+    <pre> 
+      String为构造函数方法
+      
+      var a = new String('aaaa')
+      typeof a    //"object"
+      a           //{0: "a", 1: "a", 2: "a", 3: "a", length: 4, [[PrimitiveValue]]: "aaaa"}
+      
+      var b = String("b")等同于var b = "b"
+      typeof b    //"string"
+      b           //"b"
+    </pre>
   </li>
   <li>
     <h4>Boolean(布尔)</h4>
