@@ -1,1 +1,37 @@
-
+<ul>
+  <li>
+    <h2>Number(数字)<h2>
+  </li>
+  <li>
+    <h2>String(字符串)<h2>
+  </li>
+  <li>
+    <h2>Boolean(布尔)<h2>
+  </li>
+  <li>
+    <h2>Symbol(符号)<h2>
+  </li>
+  <li>
+    <h2>Object(对象)<h2>
+    <ul>
+      <li>
+        <h3>Function(函数)</h3>
+      </li>
+      <li>
+        <h3>Array(数组)</h3>
+      </li>
+      <li>
+        <h3>Date(日期)</h3>
+      </li>
+      <li>
+        <h3>RegExp(正则表达式)</h3>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <h2>Null(空)<h2>
+  </li>
+  <li>
+    <h2>Undefined(未定义)<h2>
+  </li>
+</ul>
