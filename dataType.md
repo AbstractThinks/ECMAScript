@@ -34,6 +34,11 @@
     <pre>
       1.false、0、空字符串("")、NaN、null 和 undefined 被转换为 false
       2.所有其他值被转换为 true
+      
+      var a = new Boolean(false)
+      a     //Boolean {[[PrimitiveValue]]: false}
+      var b = Boolean(false)
+      b     //false
     </pre>
   </li>
   <li>
@@ -41,6 +46,27 @@
   </li>
   <li>
     <h4>Object(对象)</h4>
+      <pre>
+        创建对象  var a = new Object();
+        
+        function A(name){
+          this.name = name;
+        }
+        
+        var a = new A()
+        1、创建一个新对象；[var a = new Object();]
+
+        2、将构造函数的作用域赋给新对象（因此this指向了这个新对象）；[A.apply(a)]  [A原来的this指向的是window]
+        
+        3、执行构造函数中的代码(为这个新对象添加属性)；a.name = name
+        
+        4、返回新对象。 return a
+        
+        a.__proto__               //A
+        A.__proto__               //function(){}
+        a.__proto__.__proto__     //Object {}
+        A.__proto__.__proto__     //Object {}
+      </pre>
     <ul>
       <li>
         <h5>Function(函数)</h5>
