@@ -23,3 +23,35 @@ javascript的同源策略限制了一个源(origin)中不允许加载来自其�
 <h3>六、document.domain签</h3>
 
 <h3>七、使用HTML5的postMessage方法（两个iframe之间或者两个页面之间）</h3>
+<pre>
+A页面
+
+  window.onload = function() {  
+      var ifr = document.getElementById('ifr');  
+      var targetOrigin = "http://www.b.com";  
+      ifr.contentWindow.postMessage('hello world!', targetOrigin);  
+  }; 
+  
+B页面
+  var onmessage = function (event) {  
+    var data = event.data;//消息  
+    var origin = event.origin;//消息来源地址  
+    var source = event.source;//源Window对象  
+    if(origin=="http://www.a.com"){  
+      console.log(data);//hello world!  
+    }  
+  };  
+  if (typeof window.addEventListener != 'undefined') {  
+    window.addEventListener('message', onmessage, false);  
+  } else if (typeof window.attachEvent != 'undefined') {  
+    //for ie  
+    window.attachEvent('onmessage', onmessage);  
+  }  
+  
+  
+otherWindow.postMessage(message, targetOrigin);
+
+otherWindow:   指目标窗口，也就是给哪个window发消息，是 window.frames 属性的成员或者由 window.open 方法创建的窗口
+message:   是要发送的消息，类型为 String、Object (IE8、9 不支持)
+targetOrigin:   是限定消息接收范围，不限制请使用 '*'
+</pre>
