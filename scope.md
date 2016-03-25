@@ -56,3 +56,19 @@
     
     
 <pre>
+
+<h3>执行上下文栈</h3>
+<pre>
+    处于活动状态的执行上下文环境只有一个
+    执行函数体语句之前，会创建一个新的执行上下文环境。
+</pre>
+<pre>
+    var c;                      //1.进入全局上下文环境
+    function a() {
+        b()                     //3.进入function b上下文环境    
+    }
+    function b() {
+    }
+    a();                        //2.进入function a上下文环境
+</pre>
+<img src="./img/3.png">
