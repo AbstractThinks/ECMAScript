@@ -8,6 +8,7 @@ javascript的同源策略限制了一个源(origin)中不允许加载来自其�
 原理：采用script标签引入的js是不受同源策略的限制的
 <pre>
   A页面(www.a.com)
+  
     &lt;script&gt; 
     
         function JSONP_getUsers(users){  
@@ -24,13 +25,13 @@ javascript的同源策略限制了一个源(origin)中不允许加载来自其�
 <h3>二、动态创建script标签</h3>
 这种方法其实是JSONP跨域的简化版，JSONP只是在此基础上加入了回调函数。
 <pre>
-  www.b.com
+  B页面(www.b.com)
   
     &lt;?php
         echo 'var users=["paco","john","lili"]';//返回一个js变量users  
     ?&gt;  
     
-  www.a.com
+  A页面(www.a.com)
   
   js.onload = js.onreadystatechange = function() {  
       if (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete') {  
