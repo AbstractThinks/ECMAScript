@@ -12,18 +12,18 @@ javascript的同源策略限制了一个源(origin)中不允许加载来自其�
         function JSONP_getUsers(users){  
             console.dir(users);  
         }  
-    </script> 
+    &lt;/script&gt;
   B页面(www.b.com)
-    <script src="http://www.b.com/getUsers.php"></script>  
+    &lt;script src="http://www.b.com/getUsers.php"&gt;&lt;/script&gt;  
 </pre>
 
 <h3>二、动态创建script标签</h3>
 这种方法其实是JSONP跨域的简化版，JSONP只是在此基础上加入了回调函数。
 <pre>
   www.b.com
-    <?php>  
+    &lt;?php
         echo 'var users=["paco","john","lili"]';//返回一个js变量users  
-    ?>  
+    ?&gt;  
   www.a.com
   js.onload = js.onreadystatechange = function() {  
       if (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete') {  
