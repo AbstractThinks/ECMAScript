@@ -5,10 +5,33 @@ javascript的同源策略限制了一个源(origin)中不允许加载来自其�
 <img src='./img/4.png' />
 
 <h3>一、使用JSONP跨域</h3>
-原理：因为通过script标签引入的js是不受同源策略的限制的
+原理：采用script标签引入的js是不受同源策略的限制的
+<pre>
+  A页面(www.a.com)
+    <script>  
+        function JSONP_getUsers(users){  
+            console.dir(users);  
+        }  
+    </script> 
+  B页面(www.b.com)
+    <script src="http://www.b.com/getUsers.php"></script>  
+</pre>
 
 <h3>二、动态创建script标签</h3>
-
+这种方法其实是JSONP跨域的简化版，JSONP只是在此基础上加入了回调函数。
+<pre>
+  www.b.com
+    <?php>  
+        echo 'var users=["paco","john","lili"]';//返回一个js变量users  
+    ?>  
+  www.a.com
+  js.onload = js.onreadystatechange = function() {  
+      if (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete') {  
+          console.log(users);//此处取出其他域的数据  
+          js.onload = js.onreadystatechange = null;  
+      }  
+  };  
+</pre>
 <h3>三、Access Control</h3>
 <pre>
   例： a.com 对 b.com发起请求
@@ -55,3 +78,7 @@ otherWindow:   指目标窗口，也就是给哪个window发消息，是 window.
 message:   是要发送的消息，类型为 String、Object (IE8、9 不支持)
 targetOrigin:   是限定消息接收范围，不限制请使用 '*'
 </pre>
+
+
+
+<a href='http://blog.csdn.net/kongjiea/article/details/44201021'>参考</a>
