@@ -8,7 +8,7 @@ javascript的同源策略限制了一个源(origin)中不允许加载来自其�
 原理：采用script标签引入的js是不受同源策略的限制的
 <pre>
   A页面(www.a.com)
-    <script>  
+    &lt;script&gt; 
         function JSONP_getUsers(users){  
             console.dir(users);  
         }  
