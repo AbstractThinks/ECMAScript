@@ -9,11 +9,15 @@ javascript的同源策略限制了一个源(origin)中不允许加载来自其�
 <pre>
   A页面(www.a.com)
     &lt;script&gt; 
+    
         function JSONP_getUsers(users){  
             console.dir(users);  
         }  
+        
     &lt;/script&gt;
+    
   B页面(www.b.com)
+  
     &lt;script src="http://www.b.com/getUsers.php"&gt;&lt;/script&gt;  
 </pre>
 
@@ -21,10 +25,13 @@ javascript的同源策略限制了一个源(origin)中不允许加载来自其�
 这种方法其实是JSONP跨域的简化版，JSONP只是在此基础上加入了回调函数。
 <pre>
   www.b.com
+  
     &lt;?php
         echo 'var users=["paco","john","lili"]';//返回一个js变量users  
     ?&gt;  
+    
   www.a.com
+  
   js.onload = js.onreadystatechange = function() {  
       if (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete') {  
           console.log(users);//此处取出其他域的数据  
