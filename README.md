@@ -9,5 +9,5 @@
    <li><a href="./domRender.md">dom渲染</a></li>
    <li><a href="https://github.com/oneuijs/You-Dont-Need-jQuery/blob/master/README.zh-CN.md" target="_blank">You Don't Need jQuery</a>
    <li><a href="./css_name.md">css命名规范</a></li>
-<li><a href="./box.md">css盒模型/a></li>
+<li><a href="./box.md">css盒模型</a></li>
 </ul>
