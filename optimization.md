@@ -45,4 +45,4 @@ img.src = url;
 </pre>
 
 
-<a href="http://www.tuicool.com/articles/J3uyaa" target="blank">参考yahoo优化建议</a>
+<a href="http://www.tuicool.com/articles/J3uyaa" target="_blank">参考yahoo优化建议</a>
