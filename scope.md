@@ -58,17 +58,46 @@
 <pre>
 
 <h3>执行上下文栈</h3>
+
 <pre>
     处于活动状态的执行上下文环境只有一个
     执行函数体语句之前，会创建一个新的执行上下文环境。
 </pre>
 <pre>
-    var c;                      //1.进入全局上下文环境
-    function a() {
+    var c = 10;                      //1.进入全局上下文环境
+    var b;
+    function a(x) {
+        var d = 10;
         b()                     //3.进入function b上下文环境    
     }
-    function b() {
+    b = function () {
+        
     }
-    a();                        //2.进入function a上下文环境
+    a(10);                        //2.进入function a上下文环境
+    
+    
+    在执行代码之前，首先将创建全局上下文环境。
+    
+    c           undefined
+    b           undefined
+    a           function
+    this        window
+    
+    然后是代码执行。代码执行到a()之前，上下文环境中的变量都在执行过程中被赋值。
+    
+    c           10
+    b           function
+    a           function
+    this        window
+    
+    代码执行到a(),跳转到a函数内部，执行函数体语句之前，会创建一个新的执行上下文环境。
+    
+    d           undefined
+    x           10
+    arguments   [10]
+    this        window
+    
+    ......
+    
 </pre>
 <img src="./img/3.png">
