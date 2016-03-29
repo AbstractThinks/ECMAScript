@@ -89,8 +89,8 @@ ul,li,div,span {
 
 11、区分大小写
 
-</pre>
-定义名称都采用小写
 <pre>
+定义名称都采用小写
+</pre>
 
 <a href="http://www.cnblogs.com/visi_zhangyang/archive/2011/02/22/1961396.html">参考</a>
