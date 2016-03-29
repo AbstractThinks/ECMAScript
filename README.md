@@ -6,4 +6,5 @@
   <li><a href="./closure.md">闭包</a></li>
   <li><a href="./cross-origin.md">跨域</a></li>
    <li><a href="./optimization.md">web优化</a></li>
+   <li><a href="./domRender.md">dom渲染</a></li>
 </ul>
