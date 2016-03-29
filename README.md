@@ -7,4 +7,5 @@
   <li><a href="./cross-origin.md">跨域</a></li>
    <li><a href="./optimization.md">web优化</a></li>
    <li><a href="./domRender.md">dom渲染</a></li>
+   <li><a href="https://github.com/oneuijs/You-Dont-Need-jQuery/blob/master/README.zh-CN.md" target="_blank">You Don't Need jQuery</a>
 </ul>
