@@ -43,3 +43,6 @@ img.src = url;
 
 2、  无样式内容的闪烁
 </pre>
+
+
+<a href="http://www.tuicool.com/articles/J3uyaa">参考yahoo优化建议</a>
