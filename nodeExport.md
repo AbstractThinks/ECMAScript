@@ -1,6 +1,10 @@
 每一个node.js执行文件，都自动创建一个module对象
+
 module.exports的初始化值为{};
+
 module.exports = {};
+
+<a href="./node/exports/1">测试代码</a>
 
 exports是对引用 module.exports的值
 
@@ -18,7 +22,7 @@ import.js
   console.log(x.a)          //2
 </pre>
 
-<a href="">测试代码</a>
+<a href="./node/exports/2">测试代码</a>
 
 js函数既是对象，而module.export导出的函数只能调用其静态方法,不能调用其私有方法(prototype属性下的方法)
 
@@ -26,17 +30,17 @@ export.js
 <pre>
 function a(){
 
- }
+}
  
- a.prototype.test = function(){
-  console.log('test')
- }
+a.prototype.test = function(){
+ console.log('test')
+}
 
- a.test1 = function(){
-  console.log('test1')
- }
- module.exports = a
- </pre>
+a.test1 = function(){
+console.log('test1')
+}
+module.exports = a
+</pre>
  
  import.js
  <pre>
@@ -46,7 +50,7 @@ function a(){
  console.log(x.test1) //[Function]
  x.test1() //test1
  </pre>
-
+<a href="./node/exports/3">测试代码</a>
 <h3>总结</h3>
 
 <pre>
