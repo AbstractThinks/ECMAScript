@@ -45,3 +45,9 @@ function a(){
  console.log(x.test1) //[Function]
  x.test1() //test1
  </pre>
+
+##总结
+<pre>
+exports = module.exports = 对象;
+exports.a = a
+</pre>
