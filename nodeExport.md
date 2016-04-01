@@ -46,7 +46,7 @@ function a(){
  x.test1() //test1
  </pre>
 
-##总结
+## 总结
 
 <pre>
 exports = module.exports = 对象;
