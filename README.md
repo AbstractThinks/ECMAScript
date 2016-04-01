@@ -21,6 +21,7 @@
 
 <ul>
 <li><a href="./nodeRequest.md">node两种请求方式实现区别</a></li>
+<li><a href="./nodeExport.md">export vs export module</a></li>
 <li><a href="./nodeStaticServer.md">node搭建静态服务器(未完成)</a></li>
 <li><a href="./nodeDynamicServer.md">node搭建动态服务器(未完成)</a></li>
 <li><a href="./nodeUpload.md">node上传功能(未完成)</a></li>
@@ -33,6 +34,7 @@
 <li><a href="./css_name.md">css命名规范</a></li>
 <li><a href="./box.md">css盒模型</a></li>
 <li><a href="./layout.md">css布局概念</a></li>
+<li><a href="./css_library.md">css库策略</a></li>
 </ul>
 
 #app
