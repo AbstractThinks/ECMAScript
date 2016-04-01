@@ -47,6 +47,7 @@ function a(){
  </pre>
 
 ##总结
+
 <pre>
 exports = module.exports = 对象;
 exports.a = a
