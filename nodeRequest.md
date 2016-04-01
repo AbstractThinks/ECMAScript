@@ -1,4 +1,5 @@
 #get请求
+<pre>
 var http = require('http');
 var url = require("url");
 http.createServer(function (req, res)
@@ -9,8 +10,10 @@ http.createServer(function (req, res)
     res.end();
 }).listen(8000, "127.0.0.1");
 console.log('Server running at http://127.0.0.1:8000/');
+</pre>
 
 #post请求
+<pre>
 var http = require('http');
 var url = require("url");
 var querystring = require("querystring");
@@ -29,3 +32,4 @@ http.createServer(function (req, res) {
     });
 }).listen(8000, "127.0.0.1");
 console.log('Server running at http://127.0.0.1:8000/');
+</pre>
