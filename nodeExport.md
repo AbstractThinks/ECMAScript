@@ -4,7 +4,6 @@ module.exports = {};
 
 exports是对引用 module.exports的值
 
-
 真正导出的执行是module.exports，而不是exports
 
 export.js
@@ -18,6 +17,8 @@ import.js
   var x = require('./foo');
   console.log(x.a)          //2
 </pre>
+
+<a href="">测试代码</a>
 
 js函数既是对象，而module.export导出的函数只能调用其静态方法,不能调用其私有方法(prototype属性下的方法)
 
@@ -39,14 +40,14 @@ function a(){
  
  import.js
  <pre>
- var x = require('./foo');
+ var x = require('./export');
  console.log(x) //{ [Function: a] test1: [Function] }
  console.log(x.test) //undefined
  console.log(x.test1) //[Function]
  x.test1() //test1
  </pre>
 
-## 总结
+<h3>总结</h3>
 
 <pre>
 exports = module.exports = 对象;
