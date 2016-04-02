@@ -13,5 +13,7 @@ var obj = {};
 obj.__proto__ = a.prototype;
 
 a.call(obj);
+
+return obj;
 </pre>
 
