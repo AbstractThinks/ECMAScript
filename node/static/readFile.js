@@ -6,6 +6,7 @@ var fs = require("fs");
 
 
 var readFile = function () {
+
   path.exists(realPath, function (exists) {
 
     if (!exists) {
@@ -42,3 +43,5 @@ var readFile = function () {
 
   });
 }
+
+module.exports = readFile
