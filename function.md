@@ -47,3 +47,4 @@ b.hasOwnProperty("sayAge")      //true
 b.hasOwnProperty("sayAge2")     //false
 
 </pre>
+<img src="./img/javascript_object_layout.jpg" />
