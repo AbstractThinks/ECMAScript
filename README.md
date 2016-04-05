@@ -25,7 +25,7 @@
 <li><a href="./nodeCache.md">cach详解(未完成)</a></li>
 <li><a href="./nodeRequest.md">node两种请求方式实现区别</a></li>
 <li><a href="./nodeExport.md">export vs export module</a></li>
-<li><a href="./nodeStaticServer.md">node搭建静态服务器(未完成)</a></li>
+<li><a href="./nodeStaticServer.md">node搭建静态服务器(媒体断点支持未完成)</a></li>
 <li><a href="./nodeDynamicServer.md">node搭建动态服务器(未完成)</a></li>
 <li><a href="./nodeUpload.md">node上传功能(未完成)</a></li>
 <li><a href="./middleware.md">中间件</a></li>
