@@ -43,21 +43,28 @@ http.createServer(function(request, response) {
 		var type = path.extname(pathname);
 		type = type ? type.slice(1) : 'unknown';
 		var contentType = mime[type] || "text/plain";
-
+		response.setHeader("Content-Type", contentType);
+		response.setHeader("Server", "Node/V5");
 
   		fs.stat(realPath, function (err, stat) {
 
 		    var lastModified = stat.mtime.toUTCString();
 		    var ifModifiedSince = "If-Modified-Since".toLowerCase();
 		    response.setHeader("Last-Modified", lastModified);
-
+		    
 		    //缓存头部信息
 		    if (type.match(config.Expires.fileMatch)) {
 
-			    var expires = new Date();
-			    expires.setTime(expires.getTime() + config.Expires.maxAge * 1000);
-			    response.setHeader("Expires", expires.toUTCString());
+		    	/**
+		    	 * Expires是http1.0产物，现在基本上已经不怎么使用了
+		    	 */
+			    // var expires = new Date();
+			    // expires.setTime(expires.getTime() + config.Expires.maxAge * 1000);
+			    // response.setHeader("Expires", expires.toUTCString());
+			    
 			    response.setHeader("Cache-Control", "max-age=" + config.Expires.maxAge);
+			    // response.setHeader("Cache-Control", "max-age=1");
+			    // response.setHeader("Cache-Control", "no-cache");
 
 			}
 
@@ -76,15 +83,13 @@ http.createServer(function(request, response) {
 		                response.end(err);
 
 		  			} else {
-		  				response.setHeader("Server", "Node/V5");
-		  				response.writeHead(200, {'Content-Type': contentType});
 		  				//gzip传输模式
 		  				var raw = fs.createReadStream(realPath);
 		  				var acceptEncoding = request.headers['accept-encoding'] || "";
 		  				var matched = type.match(config.Compress.match);
 
 		  				if (matched && acceptEncoding.match(/\bgzip\b/)) {
-
+		  					// response.writeHead(200, {'Content-Type': contentType});
 	                        response.writeHead(200, "Ok", {'Content-Encoding': 'gzip'});
 	                        raw.pipe(zlib.createGzip()).pipe(response);
 
@@ -95,7 +100,7 @@ http.createServer(function(request, response) {
 	                        raw.pipe(zlib.createDeflate()).pipe(response);
 
 	                    } else {
-
+	                    	// response.writeHead(200, {'Content-Type': contentType});
 	                        response.writeHead(200, "Ok");
 	                        raw.pipe(response);
 
