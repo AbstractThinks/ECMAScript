@@ -23,9 +23,31 @@ function Scope() {
   };
   
   Scope.prototype.$digest = function() {
-    _.forEach(this.$$watchers, function(watch) {
+    this.$$watchers.forEach(function(watch) {
       watch.listenerFn();
     });  
+  };
+</pre>
+三、脏值检测
+<pre>
+  Scope.prototype.$watch = function(watchFn, listenerFn) {
+    var watcher = {
+      watchFn: watchFn,
+      listenerFn: listenerFn
+    };
+    this.$$watchers.push(watcher);
+  };
+  
+  Scope.prototype.$digest = function() {
+    <b>var self = this;
+    this.$$watchers.forEach(function(watch) {
+      var newValue = watch.watchFn(self);
+      var oldValue = watch.last;
+      if (newValue != oldValue) {
+        watch.listenerFn(newValue, oldValue, self);
+      }
+      watch.last = newValue;
+    });</b>  
   };
 </pre>
 
