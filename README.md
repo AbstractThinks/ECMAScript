@@ -21,6 +21,7 @@
 #nodejs
 
 <ul>
+<li><a href="./nodeDebug.md">node调试技术</a></li>
 <li><a href="./nodeRequest.md">node两种请求方式实现区别</a></li>
 <li><a href="./nodeExport.md">export vs export module</a></li>
 <li><a href="./nodeStaticServer.md">node搭建静态服务器(未完成)</a></li>
