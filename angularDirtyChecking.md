@@ -44,6 +44,7 @@ $watch和$digest是相辅相成的。两者一起，构成了Angular作用域的
 使用$watch，可以在Scope上添加一个监听器。当Scope上发生变更时，监听器会收到提示。给$watch指定如下两个函数，就可以创建一个监听器：
 
 <b>一个监控函数watchFn，用于指定所关注的那部分数据。</b>
+
 <b>一个监听函数listenerFn，用于在数据变更的时候接受提示。</b>
 
 作为一名Angular用户，一般来说，是监控一个表达式，而不是使用监控函数。监控表达式是一个字符串，比如说“user.firstName”，通常在数据绑定，指令的属性，或者JavaScript代码中指定，它被Angular解析和编译成一个监控函数。在这篇文章的后面部分我们会探讨这是如何做的。在这篇文章中，我们将使用稍微低级的方法直接提供监控功能。
@@ -80,7 +81,7 @@ http://jsbin.com/oMaQoxa/2/embed?js,console
 
 这些本身没什么大用，我们要的是能检测由监控函数指定的值是否确实变更了，然后调用监听函数。
 
-脏值检测
+###脏值检测
 如同上文所述，监听器的监听函数应当返回我们所关注的那部分数据的变化，通常，这部分数据就存在于作用域中。为了使得访问作用域更便利，在调用监控函数的时候，使用当前作用域作为实参。一个关注作用域上fiestName属性的监听器像这个样子：
 <pre>
 function(scope) {
@@ -215,7 +216,7 @@ http://jsbin.com/uNapUWe/2/embed?js,console
 
 现在，我们把注意力转到如何检测变更上吧。
 
-基于值的脏检查
+###基于值的脏检查
 我们曾经使用严格等于操作符(===)来比较新旧值，在绝大多数情况下，它是不错的，比如所有的基本类型（数字，字符串等等），也可以检测一个对象或者数组是否变成新的了，但Angular还有一种办法来检测变更，用于检测当对象或者数组内部产生变更的时候。那就是：可以监控值的变更，而不是引用。
 
 这类脏检查需要给$watch函数传入第三个布尔类型的可选参数当标志来开启。当这个标志为真的时候，基于值的检查开启。我们来重新定义$watch，接受这个参数，并且把它存在监听器里：
@@ -234,7 +235,7 @@ Scope.prototype.$watch = function(watchFn, listenerFn, valueEq) {
 基于值的脏检查意味着如果新旧值是对象或者数组，我们必须遍历其中包含的所有内容。如果它们之间有任何差异，监听器就脏了。如果该值包含嵌套的对象或者数组，它也会递归地按值比较。
 
 Angular内置了自己的相等检测函数，但是我们会用Lo-Dash提供的那个。让我们定义一个新函数，取两个值和一个布尔标志，并比较相应的值：
-
+<pre>
 Scope.prototype.$$areEqual = function(newValue, oldValue, valueEq) {
   if (valueEq) {
     return _.isEqual(newValue, oldValue);
@@ -242,10 +243,11 @@ Scope.prototype.$$areEqual = function(newValue, oldValue, valueEq) {
     return newValue === oldValue;
   }
 };
+</pre>
 为了提示值的变化，我们也需要改变之前在每个监听器上存储旧值的方式。只存储当前值的引用是不够的，因为在这个值内部发生的变更也会生效到它的引用上，$$areEqual方法比较同一个值的两个引用始终为真，监控不到变化，因此，我们需要建立当前值的深拷贝，并且把它们储存起来。
 
 就像相等检测一样，Angular也内置了自己的深拷贝函数，但我们还是用Lo-Dash提供的。我们修改一下$digestOnce，在内部使用新的$$areEqual函数，如果需要的话，也复制最后一次的引用：
-
+<pre>
 Scope.prototype.$$digestOnce = function() {
   var self  = this;
   var dirty;
@@ -260,6 +262,7 @@ Scope.prototype.$$digestOnce = function() {
   });
   return dirty;
 };
+</pre>
 现在我们可以看到两种脏检测方式的差异：
 
 http://jsbin.com/ARiWENO/3/embed?js,console
@@ -270,11 +273,11 @@ Angular也提供了第三种脏检测的方法：集合监控。就像基于值�
 
 在我们完成值的比对之前，还有些JavaScript怪事要处理一下。
 
-非数字（NaN）
+###非数字（NaN）
 在JavaScript里，NaN（Not-a-Number）并不等于自身，这个听起来有点怪，但确实就这样。如果我们在脏检测函数里不显式处理NaN，一个值为NaN的监听器会一直是脏的。
 
 对于基于值的脏检测来说，这个事情已经被Lo-Dash的isEqual函数处理掉了。对于基于引用的脏检测来说，我们需要自己处理。来修改一下$$areEqual函数的代码：
-
+<pre>
 Scope.prototype.$$areEqual = function(newValue, oldValue, valueEq) {
   if (valueEq) {
     return _.isEqual(newValue, oldValue);
@@ -284,6 +287,7 @@ Scope.prototype.$$areEqual = function(newValue, oldValue, valueEq) {
        isNaN(newValue) && isNaN(oldValue));
   }
 };
+</pre>
 现在有NaN的监听器也正常了：
 
 http://jsbin.com/ijINaRA/2/embed?js,console
