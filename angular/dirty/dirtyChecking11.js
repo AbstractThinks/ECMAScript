@@ -144,6 +144,8 @@ Scope.prototype.$$postDigest = function(fn) {
 var scope = new Scope();
 scope.aValue = "abc";
 scope.counter = 0;
+scope.aValue2 = "123"
+scope.aValue3 = "1234567"
 
 var removeWatch = scope.$watch(
   function(scope) {
@@ -153,16 +155,33 @@ var removeWatch = scope.$watch(
     scope.counter++;
   }
 );
+var removeWatch2 = scope.$watch(
+  function(scope) {
+    return scope.aValue2;
+  },
+  function(newValue, oldValue, scope) {
+    scope.counter++;
+  }
+);
+var removeWatch3 = scope.$watch(
+  function(scope) {
+    return scope.aValue3;
+  },
+  function(newValue, oldValue, scope) {
+    scope.counter++;
+  }
+);
 
 scope.$digest();
-console.assert(scope.counter === 1);
+console.log(scope.counter === 1);
 
 scope.aValue = 'def';
 scope.$digest();
-console.assert(scope.counter === 2);
+console.log(scope.counter === 2);
 
 removeWatch();
+removeWatch3();
 scope.aValue = 'ghi';
 scope.$digest();
-console.assert(scope.counter === 2); // No longer incrementing
+console.log(scope.counter === 2); // No longer incrementing
 
