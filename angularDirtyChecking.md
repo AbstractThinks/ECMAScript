@@ -2,7 +2,7 @@
 
  
 
-构建自己的AngularJS，第一部分：Scope和Digest
+##构建自己的AngularJS，第一部分：Scope和Digest
 原文链接：http://teropa.info/blog/2013/11/03/make-your-own-angular-part-1-scopes-and-digest.html
 
 Angular是一个成熟和强大的JavaScript框架。它也是一个比较庞大的框架，在熟练掌握之前，需要领会它提出的很多新概念。很多Web开发人员涌向Angular，有不少人面临同样的障碍。Digest到底是怎么做的？定义一个指令（directive）有哪些不同的方法？Service和provider有什么区别？
@@ -24,11 +24,12 @@ Angular的文档挺不错的，第三方的资源也越来越丰富，想要学�
 
 http://jsbin.com/UGOVUk/4/embed?js,console
 
-Scope对象
+###Scope对象
 Angular的Scope对象是POJO（简单的JavaScript对象），在它们上面，可以像对其他对象一样添加属性。Scope对象是用构造函数创建的，我们来写个最简单的版本：
-
+<pre>
 function Scope() {
 }
+</pre>
 现在我们就可以使用new操作符来创建一个Scope对象了。我们也可以在它上面附加一些属性：
 
 var aScope = new Scope();
