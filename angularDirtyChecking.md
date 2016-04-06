@@ -81,19 +81,20 @@ http://jsbin.com/oMaQoxa/2/embed?js,console
 
 脏值检测
 如同上文所述，监听器的监听函数应当返回我们所关注的那部分数据的变化，通常，这部分数据就存在于作用域中。为了使得访问作用域更便利，在调用监控函数的时候，使用当前作用域作为实参。一个关注作用域上fiestName属性的监听器像这个样子：
-
+<pre>
 function(scope) {
   return scope.firstName;
 }
+</pre>
 这是监控函数的一般形式：从作用域获取一些值，然后返回。
 
 $digest函数的作用是调用这个监控函数，并且比较它返回的值和上一次返回值的差异。如果不相同，监听器就是脏的，它的监听函数就应当被调用。
 
 想要这么做，$digest需要记住每个监控函数上次返回的值。既然我们现在已经为每个监听器创建过一个对象，只要把上一次的值存在这上面就行了。下面是检测每个监控函数值变更的$digest新实现：
-
+<pre>
 Scope.prototype.$digest = function() {
   var self = this;
-  _.forEach(this.$$watchers, function(watch) {
+  this.$$watchers.forEach(function(watch) {
     var newValue = watch.watchFn(self);
     var oldValue = watch.last;
     if (newValue !== oldValue) {
@@ -102,6 +103,7 @@ Scope.prototype.$digest = function() {
     watch.last = newValue;
   });  
 };
+</pre>
 对每个监听器，我们调用监控函数，把作用域自身当作实参传递进去，然后比较这个返回值和上次返回值，如果不同，就调用监听函数。方便起见，我们把新旧值和作用域都当作参数传递给监听函数。最终，我们把监听器的last属性设置成新返回的值，下一次可以用它来作比较。
 
 有了这个实现之后，我们就可以看到在$digest调用的时候，监听函数是怎么执行的：
@@ -120,7 +122,7 @@ $digest里会调用每个监控函数，因此，最好关注监听器的数量�
 如果你想在每次Angular的作用域被digest的时候得到通知，可以利用每次digest的时候挨个执行监听器这个事情，只要注册一个没有监听函数的监听器就可以了。
 
 想要支持这个用例，我们需要在$watch里面检测是否监控函数被省略了，如果是这样，用个空函数来代替它：
-
+<pre>
 Scope.prototype.$watch = function(watchFn, listenerFn) {
   var watcher = {
     watchFn: watchFn,
@@ -128,6 +130,7 @@ Scope.prototype.$watch = function(watchFn, listenerFn) {
   };
   this.$$watchers.push(watcher);
 };
+</pre>
 如果用了这个模式，需要记住，即使没有listenerFn，Angular也会寻找watchFn的返回值。如果返回了一个值，这个值会提交给脏检查。想要采用这个用法又想避免多余的事情，只要监控函数不返回任何值就行了。在这个例子里，监听器的值始终会是未定义的。
 
 http://jsbin.com/OsITIZu/4/embed?js,console
@@ -142,7 +145,7 @@ http://jsbin.com/eTIpUyE/2/embed?js,console
 我们需要改变一下digest，让它持续遍历所有监听器，直到监控的值停止变更。
 
 首先，我们把现在的$digest函数改名为$$digestOnce，它把所有的监听器运行一次，返回一个布尔值，表示是否还有变更了：
-
+<pre>
 Scope.prototype.$$digestOnce = function() {
   var self  = this;
   var dirty;
@@ -157,14 +160,16 @@ Scope.prototype.$$digestOnce = function() {
   });
   return dirty;
 };
+</pre>
 然后，我们重新定义$digest，它作为一个“外层循环”来运行，当有变更发生的时候，调用$$digestOnce：
-
+<pre>
 Scope.prototype.$digest = function() {
   var dirty;
   do {
     dirty = this.$$digestOnce();
   } while (dirty);
 };
+</pre>
 $digest现在至少运行每个监听器一次了。如果第一次运行完，有监控值发生变更了，标记为dirty，所有监听器再运行第二次。这会一直运行，直到所有监控的值都不再变化，整个局面稳定下来了。
 
 Angular作用域里并不是真的有个函数叫做$$digestOnce，相反，digest循环都是包含在$digest里的。我们的目标更多是清晰度而不是性能，所以把内层循环封装成了一个函数。
@@ -181,7 +186,7 @@ http://jsbin.com/eKEvOYa/3/embed?js,console
 
 JSBin执行了一段时间之后就停止了（在我机器上大概跑了100,000次左右）。如果你在别的东西比如Node.js里跑，它会一直运行下去。
 
-放弃不稳定的digest
+###放弃不稳定的digest(在监控函数中修改监听函数所监听的对象)
 我们要做的事情是，把digest的运行控制在一个可接受的迭代数量内。如果这么多次之后，作用域还在变更，就勇敢放手，宣布它永远不会稳定。在这个点上，我们会抛出一个异常，因为不管作用域的状态变成怎样，它都不太可能是用户想要的结果。
 
 迭代的最大值称为TTL（short for Time To Live）。这个值默认是10，可能有点小（我们刚运行了这个digest 100,000次！），但是记住这是一个性能敏感的地方，因为digest经常被执行，而且每个digest运行了所有的监听器。用户也不太可能创建10个以上链状的监听器。
@@ -189,7 +194,7 @@ JSBin执行了一段时间之后就停止了（在我机器上大概跑了100,00
 事实上，Angular里面的TTL是可以调整的。我们将在后续文章讨论provider和依赖注入的时候再回顾这个话题。
 
 我们继续，给外层digest循环添加一个循环计数器。如果达到了TTL，就抛出异常：
-
+<pre>
 Scope.prototype.$digest = function() {
   var ttl = 10;
   var dirty;
@@ -200,6 +205,7 @@ Scope.prototype.$digest = function() {
     }
   } while (dirty);
 };
+</pre>
 下面是更新过的版本，可以让我们循环引用的监控例子抛出异常：
 
 http://jsbin.com/uNapUWe/2/embed?js,console
@@ -212,7 +218,7 @@ http://jsbin.com/uNapUWe/2/embed?js,console
 我们曾经使用严格等于操作符(===)来比较新旧值，在绝大多数情况下，它是不错的，比如所有的基本类型（数字，字符串等等），也可以检测一个对象或者数组是否变成新的了，但Angular还有一种办法来检测变更，用于检测当对象或者数组内部产生变更的时候。那就是：可以监控值的变更，而不是引用。
 
 这类脏检查需要给$watch函数传入第三个布尔类型的可选参数当标志来开启。当这个标志为真的时候，基于值的检查开启。我们来重新定义$watch，接受这个参数，并且把它存在监听器里：
-
+<pre>
 Scope.prototype.$watch = function(watchFn, listenerFn, valueEq) {
   var watcher = {
     watchFn: watchFn,
@@ -221,6 +227,7 @@ Scope.prototype.$watch = function(watchFn, listenerFn, valueEq) {
   };
   this.$$watchers.push(watcher);
 };
+</pre>
 我们所做的一切是把这个标志加在监听器上，通过两次取反，强制转换为布尔类型。当用户调用$watch，没传入第三个参数的时候，valueEq会是未定义的，在监听器对象里就变成了false。
 
 基于值的脏检查意味着如果新旧值是对象或者数组，我们必须遍历其中包含的所有内容。如果它们之间有任何差异，监听器就脏了。如果该值包含嵌套的对象或者数组，它也会递归地按值比较。
