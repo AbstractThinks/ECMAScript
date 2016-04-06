@@ -474,7 +474,7 @@ function Scope() {
 Scope.prototype.$$postDigest = function(fn) {
   this.$$postDigestQueue.push(fn);
 };
-<pre>
+</pre>
 最终，在$digest里，当digest完成之后，就把队列里面的函数都执行掉。
 <pre>
 Scope.prototype.$digest = function() {
