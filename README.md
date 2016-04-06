@@ -22,6 +22,7 @@
 
 <ul>
 <li><a href="./nodeDebug.md">node调试技术</a></li>
+<li><a href="http://nodebeginner.org/index-zh-cn.html">node入门</a></li>
 <li><a href="./nodeCache.md">cach详解(未完成)</a></li>
 <li><a href="./nodeRequest.md">node两种请求方式实现区别</a></li>
 <li><a href="./nodeExport.md">export vs export module</a></li>
