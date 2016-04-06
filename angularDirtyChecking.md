@@ -311,7 +311,7 @@ http://jsbin.com/UzaWUC/1/embed?js,console
 
 然后，可能$eval最有意思的用法是当我们不传入函数，而是表达式。就像$watch一样，可以给$eval一个字符串表达式，它会把这个表达式编译，然后在作用域的上下文中执行。我们将在这个系列的后面部分实现这些。
 
-$apply - 集成外部代码与digest循环
+###$apply - 集成外部代码与digest循环
 可能Scope上所有函数里最有名的就是$apply了。它被誉为将外部库集成到Angular的最标准的方式，这话有个不错的理由。
 
 $apply使用函数作参数，它用$eval执行这个函数，然后通过$digest触发digest循环。下面是一个简单的实现：
@@ -332,7 +332,7 @@ $digest的调用放置于finally块中，以确保即使函数抛出异常，也
 
 http://jsbin.com/UzaWUC/2/embed?js,console
 
-延迟执行 - $evalAsync
+###延迟执行 - $evalAsync
 在JavaScript中，经常会有把一段代码“延迟”执行的情况 - 把它的执行延迟到当前的执行上下文结束之后的未来某个时间点。最常见的方式就是调用setTimeout()函数，传递一个0（或者非常小）作为延迟参数。
 
 这种模式也适用于Angular程序，但更推荐的方式是使用$timeout服务，并且使用$apply把要延迟执行的函数集成到digest生命周期。
@@ -377,7 +377,7 @@ Scope.prototype.$digest = function() {
 
 http://jsbin.com/ilepOwI/1/embed?js,console
 
-作用域阶段
+###作用域阶段
 $evalAsync做的另外一件事情是：如果现在没有其他的$digest在运行的话，把给定的$digest延迟执行。这意味着，无论什么时候调用$evalAsync，可以确定要延迟执行的这个函数会“很快”被执行，而不是等到其他什么东西来触发一次digest。
 
 需要有一种机制让$evalAsync来检测某个$digest是否已经在运行了，因为它不想影响到被列入计划将要执行的那个。为此，Angular的作用域实现了一种叫做阶段（phase）的东西，它就是作用域上一个简单的字符串属性，存储了现在正在做的信息。
@@ -453,7 +453,7 @@ Scope.prototype.$evalAsync = function(expr) {
 
 http://jsbin.com/iKeSaGi/1/embed?js,console
 
-在digest之后执行代码 - $$postDigest
+###在digest之后执行代码 - $$postDigest
 还有一种方式可以把代码附加到digest循环中，那就是把一个$$postDigest函数列入计划。
 
 在Angular中，函数名字前面有双美元符号表示它是一个内部的东西，不是应用开发人员应该用的。但它确实存在，所以我们也要把它实现出来。
@@ -503,7 +503,7 @@ Scope.prototype.$digest = function() {
 
 http://jsbin.com/IMEhowO/1/embed?js,console
 
-异常处理
+###异常处理
 现有对Scope的实现已经逐渐接近在Angular中实际的样子了，但还有些脆弱，因为我们迄今为止没有花精力在异常处理上。
 
 Angular的作用域在遇到错误的时候是非常健壮的：当产生异常的时候，不管在监控函数中，在$evalAsync函数中，还是在$$postDigest函数中，都不会把digest终止掉。我们现在的实现里，在以上任何地方产生异常都会把整个$digest弄挂。
@@ -569,7 +569,7 @@ Scope.prototype.$$digestOnce = function() {
 
 http://jsbin.com/IMEhowO/2/embed?js,console
 
-销毁一个监听器
+###销毁一个监听器
 当注册一个监听器的时候，一般都需要让它一直存在于整个作用域的生命周期，所以很少会要显式把它移除。也有些场景下，需要保持作用域的存在，但要把某个监听器去掉。
 
 Angular中的$watch函数是有返回值的，它是个函数，如果执行，就把刚注册的这个监听器销毁。想在我们这个版本里实现这功能，只要返回一个函数在里面把这个监控器从$$watchers数组去除就可以了：
