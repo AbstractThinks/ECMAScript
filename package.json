@@ -1,0 +1,22 @@
+{
+  "name": "ECMAScript",
+  "version": "1.0.0",
+  "description": "<ul> <li><a href=\"./cross-origin.md\">跨域</a></li> <li><a href=\"./optimization.md\">web优化</a></li> <li><a href=\"./domRender.md\">dom渲染</a></li> </ul>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/emobossemo/ECMAScript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emobossemo/ECMAScript/issues"
+  },
+  "homepage": "https://github.com/emobossemo/ECMAScript",
+  "devDependencies": {
+    "lodash": "^4.8.2"
+  }
+}

@@ -59,8 +59,13 @@ Scope.prototype.$$digestOnce = function() {
 
 Scope.prototype.$digest = function() {
   var dirty;
+  var ttl = 10;
   do {
     dirty = this.$$digestOnce();
+    if (dirty && !(ttl--)) {
+      console.log("10 digest iterations reached");
+      return ;
+    }
   } while (dirty);
 };
 

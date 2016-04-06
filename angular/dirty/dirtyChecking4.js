@@ -9,33 +9,15 @@ function Scope() {
  * @param  {[type]} listenerFn [description]
  * @return {[type]}            [description]
  */
-Scope.prototype.$watch = function(watchFn, listenerFn) {
+Scope.prototype.$watch = function(watchFn, listenerFn, valueEq) {
   var watcher = {
     watchFn: watchFn,
-    listenerFn: listenerFn || function() {}
+    listenerFn: listenerFn || function() {},
+    valueEq: !!valueEq
   };
   this.$$watchers.push(watcher);
 };
 
-/**
- * [$digest description]
- * 触发函数
- * @return {[type]} [description]
- */
-// Scope.prototype.$digest = function() {
-
-//   var self = this;
-
-//   this.$$watchers.forEach(function(watch) {
-//     var newValue = watch.watchFn(self);
-//     var oldValue = watch.last;
-//     if (newValue != oldValue) {
-//       watch.listenerFn(newValue, oldValue, self);
-//     }
-//     watch.last = newValue;
-//   }); 
-
-// };
 /**
  * [$digest description]
  * 触发函数升级版
@@ -48,11 +30,11 @@ Scope.prototype.$$digestOnce = function() {
   this.$$watchers.forEach(function(watch) {
     var newValue = watch.watchFn(self);
     var oldValue = watch.last;
-    if (newValue != oldValue) {
+    if (!self.$$areEqual(newValue, oldValue, watch.valueEq)) {
       watch.listenerFn(newValue, oldValue, self);
       dirty = true;
     }
-    watch.last = newValue;
+    watch.last = (watch.valueEq ? _.cloneDeep(newValue) : newValue);
   }); 
   return dirty;
 };
@@ -64,38 +46,54 @@ Scope.prototype.$digest = function() {
   } while (dirty);
 };
 
+Scope.prototype.$$areEqual = function (newValue, oldValue, valueEq) {
+  if (valueEq) {
+    //对象内部进行深层比较
+    return _.isEqual(newValue, oldValue)
+  } else {
+    //处理NaN（Not-a-Number）并不等于自身
+    //typeof NaN === 'number'    true
+    //isNaN(NaN)                  true
+    return newValue === oldValue || (typeof newValue === 'number' && typeof oldValue === 'number' &&
+       isNaN(newValue) && isNaN(oldValue));;
+  }
 
-
-// var scope = new Scope();
-// scope.$watch(
-//   function() {console.log('watchFn'); },
-//   function() {console.log('listener'); }
-// );
-
-// scope.$digest();
+}
  
-var scope = new Scope();
-scope.firstName = 'Joe';
-scope.counter = 0;
 
+var scope = new Scope();
+scope.counterByRef = 0;
+scope.counterByValue = 0;
+scope.value = [1, 2, {three: [4, 5]}];
+
+// Set up two watches for value. One checks references, the other by value.
 scope.$watch(
   function(scope) {
-    return scope.firstName;
+    return scope.value;
   },
   function(newValue, oldValue, scope) {
-    scope.counter++;
+    scope.counterByRef++;
   }
 );
+scope.$watch(
+  function(scope) {
+    return scope.value;
+  },
+  function(newValue, oldValue, scope) {
+    scope.counterByValue++;
+  },
+  true
+);
 
-// console.log(scope.counter === 0);
 scope.$digest();
-// console.log(scope.counter === 1);
-
-// scope.$digest();
-// scope.$digest();
-// console.log(scope.counter === 1);
-
-
-scope.firstName = 'Jane';
+console.log(scope.counterByRef === 1);
+console.log(scope.counterByValue === 1);
+scope.value[2].three.push(6);
 scope.$digest();
-console.log(scope.counter === 2);
+console.log(scope.counterByRef === 1);
+console.log(scope.counterByValue === 2);
+scope.value = {aNew: "value"};
+scope.$digest();
+console.assert(scope.counterByRef === 2);
+console.assert(scope.counterByValue === 3);
+
