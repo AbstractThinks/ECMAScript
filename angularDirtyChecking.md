@@ -265,6 +265,8 @@ Scope.prototype.$$digestOnce = function() {
 </pre>
 现在我们可以看到两种脏检测方式的差异：
 
+dirtyChecking3.js
+
 http://jsbin.com/ARiWENO/3/embed?js,console
 
 相比检查引用，检查值的方式显然是一个更为复杂的操作。遍历嵌套的数据结构很花时间，保持深拷贝的数据也占用不少内存。这就是Angular默认不使用基于值的脏检测的原因，用户需要显式设置这个标记去打开它。
@@ -290,6 +292,8 @@ Scope.prototype.$$areEqual = function(newValue, oldValue, valueEq) {
 </pre>
 现在有NaN的监听器也正常了：
 
+dirtyChecking4.js
+
 http://jsbin.com/ijINaRA/2/embed?js,console
 
 基于值的检测实现好了，现在我们该把注意力集中到应用程序代码如何跟作用域打交道上了。
@@ -304,6 +308,8 @@ Scope.prototype.$eval = function(expr, locals) {
 };
 </pre>
 $eval的使用一样很简单：
+
+dirtyChecking5.js
 
 http://jsbin.com/UzaWUC/1/embed?js,console
 
@@ -330,6 +336,8 @@ $digest的调用放置于finally块中，以确保即使函数抛出异常，也
 
 这里是$apply的实践：
 
+dirtyChecking6.js
+
 http://jsbin.com/UzaWUC/2/embed?js,console
 
 ###延迟执行 - $evalAsync
@@ -355,6 +363,7 @@ Scope.prototype.$evalAsync = function(expr) {
 我们显式在放入队列的对象上设置当前作用域，是为了使用作用域的继承，在这个系列的下一篇文章中，我们会讨论这个。
 
 然后，我们在$digest中要做的第一件事就是从队列中取出每个东西，然后使用$eval来触发所有被延迟执行的函数：
+(在第一次digest之后再执行$$asyncQueue队列中的函数，同时又使$$asyncQueue队列中的函数保留在当前digest当中)
 <pre>
 Scope.prototype.$digest = function() {
   var ttl = 10;
@@ -374,6 +383,8 @@ Scope.prototype.$digest = function() {
 这个实现保证了：如果当作用域还是脏的，就想把一个函数延迟执行，那这个函数会在稍后执行，但还处于同一个digest中。
 
 下面是关于如何使用$evalAsync的一个示例：
+
+dirtyChecking7.js
 
 http://jsbin.com/ilepOwI/1/embed?js,console
 
