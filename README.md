@@ -36,7 +36,7 @@
 <ul>
 <li><a href="./angularSource.md">AngularJS 源码分析(未完成)</a></li>
 <li><a href="./angularDataBinding.md">AngularJS 数据双向绑定(未完成)</a></li>
-<li><a href="./angularDirtyChecking.md">AngularJS 脏值检测机制(未完成)</a></li>
+<li><a href="./angularDirtyChecking.md">AngularJS 脏值检测机制</a></li>
 </ul>
 
 #reactjs
