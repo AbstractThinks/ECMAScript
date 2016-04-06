@@ -512,6 +512,8 @@ Scope.prototype.$digest = function() {
 </pre>
 下面是关于如何使用$$postDigest函数的：
 
+dirtyChecking9.js
+
 http://jsbin.com/IMEhowO/1/embed?js,console
 
 ###异常处理
@@ -578,6 +580,8 @@ Scope.prototype.$$digestOnce = function() {
 </pre>
 现在我们的digest循环碰到异常的时候健壮多了。
 
+dirtyChecking10.js
+
 http://jsbin.com/IMEhowO/2/embed?js,console
 
 ###销毁一个监听器
@@ -602,6 +606,8 @@ Scope.prototype.$watch = function(watchFn, listenerFn, valueEq) {
 };
 </pre>
 现在我们就可以把$watch的这个返回值存起来，以后调用它来移除这个监听器：
+
+dirtyChecking11.js
 
 http://jsbin.com/IMEhowO/4/embed?js,console
 
