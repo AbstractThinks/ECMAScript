@@ -31,10 +31,11 @@ function Scope() {
 }
 </pre>
 现在我们就可以使用new操作符来创建一个Scope对象了。我们也可以在它上面附加一些属性：
-
+<pre>
 var aScope = new Scope();
 aScope.firstName = 'Jane';
 aScope.lastName = 'Smith';
+</pre>
 这些属性没什么特别的。不需要调用特别的设置器（setter），赋值的时候也没什么限制。相反，在两个特别的函数：$watch和$digest之中发生了一些奇妙的事情。
 
 监控对象属性：$watch和$digest
@@ -47,14 +48,15 @@ $watch和$digest是相辅相成的。两者一起，构成了Angular作用域的
 作为一名Angular用户，一般来说，是监控一个表达式，而不是使用监控函数。监控表达式是一个字符串，比如说“user.firstName”，通常在数据绑定，指令的属性，或者JavaScript代码中指定，它被Angular解析和编译成一个监控函数。在这篇文章的后面部分我们会探讨这是如何做的。在这篇文章中，我们将使用稍微低级的方法直接提供监控功能。
 
 为了实现$watch，我们需要存储注册过的所有监听器。我们在Scope构造函数上添加一个数组：
-
+<pre>
 function Scope() {
   this.$$watchers = [];
 }
+</pre>
 在Angular框架中，双美元符前缀$$表示这个变量被当作私有的来考虑，不应当在外部代码中调用。
 
 现在我们可以定义$watch方法了。它接受两个函数作参数，把它们存储在$$watchers数组中。我们需要在每个Scope实例上存储这些函数，所以要把它放在Scope的原型上：
-
+<pre>
 Scope.prototype.$watch = function(watchFn, listenerFn) {
   var watcher = {
     watchFn: watchFn,
@@ -62,13 +64,15 @@ Scope.prototype.$watch = function(watchFn, listenerFn) {
   };
   this.$$watchers.push(watcher);
 };
+</pre>
 另外一面就是$digest函数。它执行了所有在作用域上注册过的监听器。我们来实现一个它的简化版，遍历所有监听器，调用它们的监听函数：
-
+<pre>
 Scope.prototype.$digest = function() {
   _.forEach(this.$$watchers, function(watch) {
     watch.listenerFn();
   });  
 };
+</pre>
 现在我们可以添加监听器，然后运行$digest了，这将会调用监听函数：
 
 http://jsbin.com/oMaQoxa/2/embed?js,console
