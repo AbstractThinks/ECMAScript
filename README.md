@@ -45,7 +45,10 @@
 #reactjs
 
 <ul>
+
+<li><a href="http://web.jobbole.com/83414/">React.js的核心入门知识</a></li>
 <li><a href="http://noeticforce.com/best-reactjs-tutorials-with-examples">reactjs tutorials</a></li>
+<li><a href="https://libraries.io/github/purplebamboo/little-reactjs">little-reactjs</a></li>
 <li><a href="./reactDiff.md">react diff算法(未完成)</a></li>
 </ul>
 
