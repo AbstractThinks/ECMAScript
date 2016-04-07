@@ -13,4 +13,5 @@
 4.若不存在则创建session并存在sessionManager的_session属性中
 
 <img src="./img/session.png" />
+
 <a href="http://www.jianshu.com/p/51d85be2e0e8">参考</a>
