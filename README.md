@@ -45,6 +45,7 @@
 #reactjs
 
 <ul>
+<li><a href="http://noeticforce.com/best-reactjs-tutorials-with-examples">reactjs tutorials</a></li>
 <li><a href="./reactDiff.md">react diff算法(未完成)</a></li>
 </ul>
 
