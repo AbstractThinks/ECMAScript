@@ -27,7 +27,7 @@
 <li><a href="./nodeRequest.md">node两种请求方式实现区别</a></li>
 <li><a href="./nodeExport.md">export vs export module</a></li>
 <li><a href="./nodeStaticServer.md">node搭建静态服务器(媒体断点支持未完成)</a></li>
-<li><a href="./nodeDynamicServer.md">node搭建动态服务器(未完成)</a></li>
+<li><a href="./nodeDynamicServer.md">node搭建动态服务器(session未完成)</a></li>
 <li><a href="./staticVsDynamic.md">静态服务器与动态服务器的区别</a></li>
 <li><a href="./nodeUpload.md">node上传功能(未完成)</a></li>
 <li><a href="./middleware.md">中间件</a></li>
@@ -38,6 +38,7 @@
 <ul>
 <li><a href="./angularSource.md">AngularJS 源码分析(未完成)</a></li>
 <li><a href="./angularDataBinding.md">AngularJS 数据双向绑定(未完成)</a></li>
+<li><a href="./angularDirective.md">AngularJS directive(未完成)</a></li>
 <li><a href="./angularDirtyChecking.md">AngularJS 脏值检测机制</a></li>
 </ul>
 
