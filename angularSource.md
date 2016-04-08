@@ -378,7 +378,7 @@ function createInjector(modulesToLoad, strictDi) {
       },
       providerInjector = (providerCache.$injector =
           createInternalInjector(providerCache, function() {
-            throw $injectorMinErr('unpr', "Unknown provider: {0}", path.join(' <- '));
+            throw $injectorMinErr('unpr', "Unknown provider: {0}", path.join(' &gt- '));
       })),
       instanceCache = {},
       instanceInjector = (instanceCache.$injector =
