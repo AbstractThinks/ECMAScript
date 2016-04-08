@@ -288,7 +288,7 @@ function angularInit(element, bootstrap) {
   <li>程序的核心初始化起始于该函数 除了通过ng-app指令自动初始化应用（间接调用bootstrap）外，我们也可以手动调用angular.bootstrap(...)来初始化应用</li>
 </ul>
 
-<pre>
+*
 function bootstrap(element, modules, config) {
   // ...省略若干代码
   var doBootstrap = function() {
@@ -341,7 +341,7 @@ function bootstrap(element, modules, config) {
     );
     return injector;
   };
-
+*
   // ...省略若干代码
 
   if (window && !NG_DEFER_BOOTSTRAP.test(window.name)) {
