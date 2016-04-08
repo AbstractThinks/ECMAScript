@@ -359,7 +359,7 @@ function bootstrap(element, modules, config) {
   <li>providerInjector（内部injector实例，负责类层级的依赖注入）</li>
   <li>instanceInjector（外部可访问injector实例，负责实例层级的依赖注入）</li>
 </ul>
-*
+<pre>
 function createInjector(modulesToLoad, strictDi) {
   strictDi = (strictDi === true);
   var INSTANTIATING = {},
@@ -378,7 +378,7 @@ function createInjector(modulesToLoad, strictDi) {
       },
       providerInjector = (providerCache.$injector =
           createInternalInjector(providerCache, function() {
-            throw $injectorMinErr('unpr', "Unknown provider: {0}", path.join(' <- '));
+            throw $injectorMinErr('unpr', "Unknown provider: {0}", path.join(' &lt- '));
       })),
       instanceCache = {},
       instanceInjector = (instanceCache.$injector =
@@ -397,7 +397,7 @@ function createInjector(modulesToLoad, strictDi) {
 
   // ...省略若干函数定义
  }
-*
+</pre>
 这里providerCache预存了$provider服务类，用来提供自定义service的注册，支持下面几个方法：
 <pre>
 $provide: {
