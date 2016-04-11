@@ -82,6 +82,12 @@
 <li><a href="./appConcept.md">Hybrid App vs Native App</a></li>
 </ul>
 
+#linux
+
+<ul>
+<li><a href="./linux.md">linux常用命令</a></li>
+</ul>
+
 
 
 
