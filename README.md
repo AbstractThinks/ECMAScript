@@ -36,16 +36,15 @@
 #angularjs
 
 <ul>
-<li><a href="./angularSource.md">AngularJS 源码分析(未完成)</a></li>
+<li><a href="../angularjs/boot.md">angularjs启动流程</a></li>
 <li><a href="./angularDataBinding.md">AngularJS 数据双向绑定(未完成)</a></li>
-<li><a href="./angularDirective.md">AngularJS directive(未完成)</a></li>
+<li><a href="../angularjs/directive.md">AngularJS directive</a></li>
 <li><a href="./angularDirtyChecking.md">AngularJS 脏值检测机制</a></li>
 </ul>
 
 #reactjs
 
 <ul>
-
 <li><a href="http://web.jobbole.com/83414/">React.js的核心入门知识(未完成)</a></li>
 <li><a href="http://noeticforce.com/best-reactjs-tutorials-with-examples">reactjs tutorials(未完成)</a></li>
 <li><a href="https://libraries.io/github/purplebamboo/little-reactjs">little-reactjs(未完成)</a></li>
@@ -56,9 +55,9 @@
 
 <ul>
 <li><a href="../../../Data-Structures-and-Algorithm">参考</a></li>
-<li><a href="../../../">快速排序</a></li>
-<li><a href="../../../">贪心算法</a></li>
-<li><a href="../../../">动态规划算法</a></li>
+<li><a href="../../../">快速排序(未完成)</a></li>
+<li><a href="../../../">贪心算法(未完成)</a></li>
+<li><a href="../../../">动态规划算法(未完成)</a></li>
 </ul>
 
 #jquery
