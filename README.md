@@ -15,7 +15,8 @@
 <li><a href="./closure.md">闭包</a></li>
 <li><a href="./event.md">js事件机制</a></li>
 <li><a href="./function.md">函数对象</a></li>
-<li><a href="https://github.com/oneuijs/You-Dont-Need-jQuery/blob/master/README.zh-CN.md" target="_blank">You Don't Need jQuery</a>
+<li><a href="https://github.com/oneuijs/You-Dont-Need-jQuery/blob/master/README.zh-CN.md" target="_blank">You Don't Need jQuery</a></li>
+<li><a href="http://es6.ruanyifeng.com/#README">ES6语法</a></li>
 </ul>
 
 #nodejs
