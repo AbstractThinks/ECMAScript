@@ -49,8 +49,8 @@
 <ul>
 <li><a>react组件生命周期（未完成）</a></li>
 <li><a>react中state和props的区别（未完成）</a></li>
-<li><a>react数据流管理架构(flux, reflux, redux)（未完成）</a></li>
-<li><a>react-router（未完成）</a></li>
+<li><a href="../reactsoucecode/redux-sum.md">react数据流管理架构(redux)</a></li>
+<li><a href="../reactsoucecode/reactRouter.md">react-router使用教程</a></li>
 <li><a href="http://web.jobbole.com/83414/">React.js的核心入门知识(未完成)</a></li>
 <li><a href="http://noeticforce.com/best-reactjs-tutorials-with-examples">reactjs tutorials(未完成)</a></li>
 <li><a href="https://libraries.io/github/purplebamboo/little-reactjs">little-reactjs(未完成)</a></li>
