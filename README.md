@@ -44,6 +44,14 @@
 <li><a href="./angularDirtyChecking.md">AngularJS 脏值检测机制</a></li>
 </ul>
 
+#angularjs2.x
+
+<ul>
+<li><a href="../angularjs/boot.md">路由</a></li>
+<li><a href="./angularDataBinding.md">模块</a></li>
+<li><a href="../angularjs/directive.md">绑定</a></li>
+</ul>
+
 #reactjs
 
 <ul>
